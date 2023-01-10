@@ -44,7 +44,10 @@ avg_query = (MetricQuery()).avg("price").get()
 filter_query = (FullTextQuery()).match("type", "shirt")
 es_query = (BucketQuery()).filter(avg_query, "only_shirts", filter_query).get()
 ```
-What does this method do? 
+What does this method do? First line builds a simple query for avarage on price field. Third line builds a second option where only avarage price of shirts are calculated. Here's the expected output:
+```
+{'aggs': {'aggs': {'avg_price': {'avg': {'field': 'price'}}}}, 'only_shirts': {'aggs': {'aggs': {'avg_price': {'avg': {'field': 'price'}}}}, 'filter': {'aggs': {'avg_price': {'avg': {'field': 'price'}}}}}}
+```
 
 <h3>Testing of Library</h3>
 If you want to add new test functionality to the library, you can test as follows:
