@@ -1,18 +1,8 @@
 from .helpers.dictionarybuilder import basic_aggregation, multifield_aggregation
 
-class MetricQuery():
-    es_query = None
-    query = None
+from .aggquery import AggQuery
 
-    def where(self, query):
-        self.query = query
-        return self
-
-    def get(self):
-        output = self.es_query
-        if self.query != None: output["query"] = self.query["query"]
-        return output
-
+class MetricQuery(AggQuery):
     def avg(self, field, response_field = None):
         self.es_query = basic_aggregation("avg", field, response_field)
         return self

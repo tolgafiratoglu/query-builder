@@ -1,18 +1,8 @@
 from .helpers.dictionarybuilder import multifield_aggregation
 
-class BucketQuery():
-    es_query = None
-    query = None
+from .aggquery import AggQuery
 
-    def where(self, query):
-        self.query = query
-        return self
-
-    def get(self):
-        output = self.es_query
-        if self.query != None: output["query"] = self.query["query"]
-        return output
-
+class BucketQuery(AggQuery):
     def histogram(self, field, interval, min_doc_count = None):
         fields = {
            "field": field,
@@ -23,6 +13,8 @@ class BucketQuery():
         return self
 
     def date_histogram(self, field, calendar_interval = None, fixed_interval = None):
+        if calendar_interval != None or fixed_interval != None:
+            raise Exception("You should either provide a calendar interval or a fixed interval")
         fields = {
            "field": field,
         }

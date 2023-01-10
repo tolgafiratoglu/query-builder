@@ -26,4 +26,7 @@ def basic_query(field, value, context = "match"):
                 field: value
             }
         }
-    }    
+    }
+
+def range(field, min, max):
+    return {"range": { "gte" : min, "lte" : max }}
