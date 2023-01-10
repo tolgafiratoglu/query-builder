@@ -20,10 +20,7 @@ def test_geo_bonds():
     assert (MetricQuery()).geo_bonds("location").get() == {"aggs": {"viewport": {"geo_bonds": {"field": "location"}}}}
 
 def test_geo_centroid():
-    assert (MetricQuery()).geo_centroid("location").get() == {"aggs": {"centroid": {"geo_centroid": {"field": "location"}}}}    
-
-def test_geo_centroid():
-    assert (MetricQuery()).geo_centroid("location").get() == {"aggs": {"centroid": {"geo_centroid": {"field": "location"}}}}        
+    assert (MetricQuery()).geo_centroid("location").get() == {"aggs": {"centroid": {"geo_centroid": {"field": "location"}}}}           
 
 def test_boxplot():
     assert (MetricQuery()).boxplot("location", "boxplot_data").get() == {"aggs": {"boxplot_data": {"boxplot": {"field": "location"}}}, "size": 0}
